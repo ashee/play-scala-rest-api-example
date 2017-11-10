@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                checkout scm
+                sh 'sbt clean compile test'
             }
         }
         stage('Test') {
