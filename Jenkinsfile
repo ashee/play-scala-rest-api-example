@@ -1,7 +1,21 @@
 pipeline {
-	stage 'checkout'
-	checkout scm
+    agent any
 
-	stage 'build'
-	sh 'sbt compile'
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
 }
