@@ -1,22 +1,15 @@
-pipeline {
-    agent any
+podTemplate(label: 'sbtPod', containers: [
+    containerTemplate(name: 'sbt', image: 'hseeberger/scala-sbt', ttyEnabled: true, command: 'cat'),
+  ]) {
 
-    stages {
-        stage('Build') {
-            steps {
-                checkout scm
-                sh 'sbt clean compile test'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
+  node('sbtPod') {
+
+      stage('Get sbt project') {
+          container('sbt') {
+              stage('Build a sbt project') {
+                sh 'sbt dist'
+              }
+          }
+      }
+  }
 }
