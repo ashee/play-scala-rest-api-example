@@ -1,5 +1,5 @@
 podTemplate(label: 'sbtPod', containers: [
-    containerTemplate(name: 'sbt', image: 'pplenik/sbt-build-tool', ttyEnabled: true, command: 'cat'),
+    containerTemplate(name: 'sbt', image: 'pplenik/jnlp-slave-sbt-build-tools', ttyEnabled: true, command: 'cat'),
   ]) {
 
   node('sbtPod') {
