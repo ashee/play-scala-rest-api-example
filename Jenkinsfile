@@ -6,9 +6,12 @@ podTemplate(label: 'sbtPod', containers: [
 
       stage('Get sbt project') {
           container('sbt') {
-              stage('Build a sbt project') {
-                sh 'sbt dist'
-              }
+            stage 'checkout'
+            checkout scm
+            
+            stage('Build a sbt project') {
+              sh 'sbt dist'
+            }
           }
       }
   }
